@@ -1,5 +1,6 @@
 #!usrbinenv bash
 # exit on error
+chmod +x build.sh
 set -o errexit
 
 pip install -r DjangoAPI/require.txt  
