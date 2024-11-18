@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from myapp1 import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -24,3 +25,4 @@ urlpatterns = [
          path('', include('myapp1.urls')),
 ]
 
+urlpatterns += staticfiles_urlpatterns()
