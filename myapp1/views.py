@@ -22,6 +22,7 @@ from django.contrib import messages
 from keras import backend as K
 import tensorflow
 from keras import backend as K
+import os
 
 
 # Create your views here.
@@ -45,9 +46,14 @@ def ohevalue(df):
 
 def approvereject(unit):
 	try:
-		mdl = load_model("F:/Projects/Loan Approval/DjangoAPI/myapp1/loan_model.h5")
+		BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+		mdl = load_model(os.path.join(BASE_DIR, "myapp1/loan_model.h5"))
+		scalers = joblib.load(os.path.join(BASE_DIR, "myapp1/scalers.pkl"))
+
+		#mdl = load_model("F:/Projects/Loan Approval/myapp1/loan_model.h5")
 		#mdl=joblib.load("F:/Projects/Loan Approval/DjangoAPI/myapp1/loan_model.pkl")
-		scalers=joblib.load("F:/Projects/Loan Approval/DjangoAPI/myapp1/scalers.pkl")
+		#scalers=joblib.load("F:/Projects/Loan Approval/myapp1/scalers.pkl")
 		X=scalers.transform(unit)
 		y_pred=mdl.predict(X)
 		y_pred=(y_pred>0.58)
